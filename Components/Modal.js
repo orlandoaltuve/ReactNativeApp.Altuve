@@ -3,7 +3,8 @@ import React from 'react';
 
 const Modal = (props) => {
     
-    const {isVisible, actionDeleteItem} = props;
+    const {isVisible, actionDeleteItem, closeModal} = props;
+
     return(
         <NewModal
             animationType='fade'
@@ -12,6 +13,9 @@ const Modal = (props) => {
         >
             <View style={styles.centeredView}>
                 <View style={styles.modal}>
+                    <Pressable style={styles.close} onPress={()=> closeModal()}>
+                        <Text style={{fontSize:30, color:'red'}}>x</Text>
+                    </Pressable>
                     <Text>¿Quieres eliminar este elemento?</Text>
                     <Pressable
                         onPress={() => actionDeleteItem()}
@@ -36,10 +40,22 @@ const styles = StyleSheet.create({
     },
     modal:{
         width:300,
-        height:100,
+        height:150,
         backgroundColor:'#F4F4F6',
         alignItems:'center',
         justifyContent:'center',
         borderRadius:20
+    },
+    close:{
+        alignSelf:'flex-end',
+      
+        marginBottom:10,
+        marginRight: 20,
+        flexDirection:'row',
+        color:'red',
+        justifyContent:'flex-end',
+        
+        
+        
     }
 });

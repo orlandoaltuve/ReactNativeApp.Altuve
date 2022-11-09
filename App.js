@@ -27,6 +27,10 @@ export default function App() {
     setTextItem("")
   }
 
+  const closeModal =()=>{
+    setModalVisible(false)
+  }
+
   const deleteItem = () => {
     setItemlist(currentState => currentState.filter(item => item.id !== itemSelected.id))
     setItemSelected({})
@@ -47,7 +51,7 @@ export default function App() {
         selectedItem={selectedItem}
         />
       </View>
-      <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} />
+      <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} closeModal={closeModal} />
 
     </View>
   );
