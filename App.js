@@ -1,7 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import AddItem from './Components/AddItem';
+import Index from './Components/Lista/Index';
 import Modal from './Components/Modal';
+
 
 export default function App() {
   const [textItem, setTextItem] = useState("")
@@ -25,17 +27,6 @@ export default function App() {
     setTextItem("")
   }
 
-
-  const renderItem = ({ item }) => (
-
-    <TouchableOpacity
-      onPress={() => selectedItem(item.id)}
-      style={styles.items}
-    >
-      <Text>{item.value}</Text>
-    </TouchableOpacity>
-  )
-
   const deleteItem = () => {
     setItemlist(currentState => currentState.filter(item => item.id !== itemSelected.id))
     setItemSelected({})
@@ -44,26 +35,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.itemContainer}>
-        <TextInput
-          value={textItem}
-          placeholder='Agregar Item a la lista'
-          style={styles.inputItem}
-          onChangeText={onChangeItem}
-        />
-        <Button
-          title='Agregar'
-          onPress={addItem}
-        />
-      </View>
+      <Text style={{fontSize:25}}> Lista de Compras</Text>
       <View>
-        <FlatList
-          data={itemList}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+        <AddItem
+        textItem={textItem}
+        onChangeItem={onChangeItem}
+        addItem={addItem}
+        />
+        <Index
+        itemList={itemList}
+        selectedItem={selectedItem}
         />
       </View>
-      <Modal isVisible={modalVisible} actionDeleteItem={deleteItem}/>
+      <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} />
 
     </View>
   );
@@ -71,23 +55,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems:'center',
     padding: 30,
     marginTop: 50,
     marginBottom: 90,
   },
-  itemContainer: {
-    flexDirection: "row",
-    justifyContent: 'space-around',
-    alignItems: "center",
-  },
-  inputItem: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    width: 200,
-  },
-  items: {
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
 });

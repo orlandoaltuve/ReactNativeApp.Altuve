@@ -11,13 +11,13 @@ const Modal = (props) => {
             visible={isVisible}
         >
             <View style={styles.centeredView}>
-                <View >
+                <View style={styles.modal}>
                     <Text>¿Quieres eliminar este elemento?</Text>
                     <Pressable
                         onPress={() => actionDeleteItem()}
                         
                     >
-                        <Text>Eliminar</Text>
+                        <Text style={{color:'red', padding:20}}>Eliminar</Text>
                     </Pressable>
                 </View>
             </View>
@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems:'center',
-        
     },
+    modal:{
+        width:300,
+        height:100,
+        backgroundColor:'#F4F4F6',
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:20
+    }
 });
